@@ -62,12 +62,12 @@ else:
 	uplink[1] = int(uplink[1])-1
 	device.interfaces[uplink[0]][uplink[1]] = 'uplink'
 
-vlans = []
+vlans = {}
 while True:
 	action = input('Type [V] to add a VLAN or [E] to save changes: ')
 	if action == 'V':
 		vid = input('vid: ')
-		vlans.append(VLAN(vid,device))
+		vlans[vid] = VLAN(vid,device)
 	elif action == 'E':
 		break
 	else:
