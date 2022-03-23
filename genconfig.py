@@ -82,4 +82,20 @@ with open(config, 'a') as c:
 				 "\n/user disable admin")
 	else:
 		c.write(f"\n/user set admin password={password}")
+
+	c.write('\n/interface bridge port')
+	for type_ in device.interfaces:
+		if type_ == 'qsfp':
+			for i in range(0,len(device.interfaces['qsfp'])):
+				for j in range(0,len(device.interfaces['qsfp'][i])):
+					if device.interfaces['qsfp'][i][j] == 'uplink':
+						c.write(f'\nadd bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp{i+1}-{j+1} pvid=4094')
+					elif device.interfaces['qsfp'][i][j] != 'reserved':
+						c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface=qsfp{i+1}-{j+1} pvid=4094')
+		else:
+			for i in range(0,len(device.interfaces[type_])):
+				if device.interfaces[type_][i] == 'uplink':
+					c.write(f'\nadd bridge=BR-Switch frame-types=admit-only-vlan-tagged interface={type_}{i+1} pvid=4094')
+				elif device.interfaces[type_][i] != 'reserved':
+					c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface={type_}{i+1} pvid=4094')
 	c.write("\n# --- genconfig config end ---")
