@@ -38,5 +38,5 @@ enter "." to end""")
                 type_ = line[0]
                 nums = nums_expand(line[1])
                 for i in nums:
-                    device.interfaces[type_][i-1] = vid
+                    device.interfaces[type_][i-1] = 'vlan'+vid
                     self.interfaces.append(type_+str(i))

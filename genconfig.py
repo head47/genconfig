@@ -95,15 +95,21 @@ with open(cfg, 'a') as c:
 					if device.interfaces['qsfp'][i][j] == 'uplink':
 						c.write(f'\nadd bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp{i+1}-{j+1} pvid=4094')
 						uplinks.append(f'qsfp{i+1}-{j+1}')
-					elif device.interfaces['qsfp'][i][j] != 'reserved':
+					elif device.interfaces['qsfp'][i][j] is None:
 						c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface=qsfp{i+1}-{j+1} pvid=4094')
+					elif device.interfaces['qsfp'][i][j].startswith('vlan'):
+						pvid = device.interfaces['qsfp'][i][j][4:]
+						c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface=qsfp{i+1}-{j+1} pvid={pvid}')
 		else:
 			for i in range(0,len(device.interfaces[type_])):
 				if device.interfaces[type_][i] == 'uplink':
 					c.write(f'\nadd bridge=BR-Switch frame-types=admit-only-vlan-tagged interface={type_}{i+1} pvid=4094')
 					uplinks.append(f'{type_}{i+1}')
-				elif device.interfaces[type_][i] != 'reserved':
+				elif device.interfaces[type_][i] is None:
 					c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface={type_}{i+1} pvid=4094')
+				elif device.interfaces[type_][i].startswith('vlan'):
+					pvid = device.interfaces[type_][i][4:]
+					c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface={type_}{i+1} pvid={pvid}')
 
 	c.write('\n/interface bridge vlan')
 	tagged = ','.join(uplinks)
