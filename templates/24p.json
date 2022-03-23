@@ -1,0 +1,6 @@
+{
+  "interfaces": {
+    "ether": 24,
+    "sfpp": 4
+  }
+}

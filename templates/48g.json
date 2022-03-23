@@ -1,0 +1,7 @@
+{
+  "interfaces": {
+    "ether": 48,
+    "sfpp": 4,
+    "qsfp": [2,4]
+  }
+}

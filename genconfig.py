@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+import os
+import pathlib
+import shutil
+
+print("genconfig v0.015")
+print("press ? at any time to get help")
+mypath = pathlib.PurePath(os.path.realpath(__file__))
+mydir = mypath.parent
+
+target = input("target device: ")
+while target == '?':
+	print("\navailable device templates:")
+	for t in os.listdir(mydir / 'templates'):
+		if t.endswith(".rsc.template"):
+			print(t[:-13])
+	target = input("target device: ")
+
+username = input("username: ")
+while username == '?':
+	print('no help available')
+	username = input("username: ")
+password = input("password: ")
+while password == '?':
+	print('no help available')
+	password = input("password: ")
+
+identity = input("identity: ")
+while identity == '?':
+	print('no help available')
+	identity = input("identity: ")
+
+output = input("output path: ")
+while output == '?':
+	print('no help available')
+	output = input("output path: ")
+
+config = shutil.copy(str(mydir / 'templates' / target)+".rsc.template", output+".rsc")
+with open(config, 'a') as c:
+	c.write( "\n# --- genconfig config start ---"
+			f"\n/system identity set name={identity}")
+	if username != 'admin':
+		c.write(f"\n/user add name={username} group=full password={password}"
+				 "\n/user disable admin")
+	else:
+		c.write(f"\n/user set admin password={password}")
+	c.write("\n# --- genconfig config end ---")

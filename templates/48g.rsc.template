@@ -1,0 +1,283 @@
+# --- genconfig template start ---
+/interface bridge
+add name=BR-Switch priority=0x7000 vlan-filtering=yes
+/interface ethernet
+set [ find default-name=ether1 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether2 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether3 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether4 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether5 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether6 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether7 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether8 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether9 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether10 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether11 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether12 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether13 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether14 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether15 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether16 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether17 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether18 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether19 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether20 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether21 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether22 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether23 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether24 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether25 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether26 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether27 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether28 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether29 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether30 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether31 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether32 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether33 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether34 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether35 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether36 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether37 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether38 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether39 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether40 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether41 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether42 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether43 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether44 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether45 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether46 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=ether47 ] loop-protect=on loop-protect-send-interval=\
+    2s
+set [ find default-name=qsfpplus1-1 ] name=qsfp1-1
+set [ find default-name=qsfpplus1-2 ] name=qsfp1-2
+set [ find default-name=qsfpplus1-3 ] name=qsfp1-3
+set [ find default-name=qsfpplus1-4 ] name=qsfp1-4
+set [ find default-name=qsfpplus2-1 ] name=qsfp2-1
+set [ find default-name=qsfpplus2-2 ] name=qsfp2-2
+set [ find default-name=qsfpplus2-3 ] name=qsfp2-3
+set [ find default-name=qsfpplus2-4 ] name=qsfp2-4
+set [ find default-name=sfp-sfpplus1 ] name=sfpp1
+set [ find default-name=sfp-sfpplus2 ] name=sfpp2
+set [ find default-name=sfp-sfpplus3 ] name=sfpp3
+set [ find default-name=sfp-sfpplus4 ] name=sfpp4
+/interface vlan
+add comment=S5_NetDev interface=BR-Switch name=v1021_BR-Switch vlan-id=1021
+/interface ethernet switch port
+set 1 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 2 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 3 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 4 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 5 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 6 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 7 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 8 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 9 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 10 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 11 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 12 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 13 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 14 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 15 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 16 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 17 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 18 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 19 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 20 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 21 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 22 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 23 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 24 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 25 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 26 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 27 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 28 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 29 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 30 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 31 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 32 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 33 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 34 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 35 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 36 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 37 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 38 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 39 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 40 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 41 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 42 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 43 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 44 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 45 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 46 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 47 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 48 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 49 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 50 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 51 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 52 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 53 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 54 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 55 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 56 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 57 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 58 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 59 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 60 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+set 61 limit-unknown-multicasts=yes limit-unknown-unicasts=yes storm-rate=1
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/snmp community
+set [ find default=yes ] disabled=yes
+add addresses=::/0 name=iips-zabbix
+/system logging action
+set 3 remote=10.128.19.3 remote-port=5140
+/interface bridge port
+add bpdu-guard=yes bridge=BR-Switch interface=ether1 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether2 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether3 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether4 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether5 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether6 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether7 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether8 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether9 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether10 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether11 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether12 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether13 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether14 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether15 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether16 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether17 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether18 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether19 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether20 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether21 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether22 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether23 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether24 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether25 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether26 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether27 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether28 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether29 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether30 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether31 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether32 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether33 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether34 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether35 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether36 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether37 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether38 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether39 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether40 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether41 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether42 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether43 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether44 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether45 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether46 pvid=4094
+add bpdu-guard=yes bridge=BR-Switch interface=ether47 pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=sfpp1 pvid=\
+    4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=sfpp2 pvid=\
+    4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=sfpp3 pvid=\
+    4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=sfpp4 pvid=\
+    4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp1-1 \
+    path-cost=1 pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp1-2 \
+    pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp1-3 \
+    pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp1-4 \
+    pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp2-1 \
+    path-cost=2 pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp2-2 \
+    pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp2-3 \
+    pvid=4094
+add bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp2-4 \
+    pvid=4094
+/interface bridge vlan
+add bridge=BR-Switch comment=S5_NetDev tagged=\
+    BR-Switch,sfpp1,sfpp2,qsfp1-1,qsfp2-1,sfpp3,sfpp4 vlan-ids=1021
+add bridge=BR-Switch comment=S5_Cams tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
+    vlan-ids=1022
+add bridge=BR-Switch comment=S5_WiFi tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
+    vlan-ids=1023
+add bridge=BR-Switch comment=S5_Corp tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
+    vlan-ids=1053
+add bridge=BR-Switch comment=S5_Guests tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
+    vlan-ids=1052
+/ip dhcp-client
+add disabled=no interface=v1021_BR-Switch
+/ip service
+set ftp port=20021
+set www disabled=yes
+set api port=28728
+set winbox port=28291
+set api-ssl disabled=yes
+/snmp
+set enabled=yes trap-community=iips-zabbix trap-version=2
+/system clock
+set time-zone-name=Europe/Moscow
+/system logging
+add action=remote topics=info
+add action=remote topics=warning
+add action=remote topics=error
+/system routerboard settings
+set boot-os=router-os
+# --- genconfig template end ---
