@@ -3,7 +3,7 @@ import os
 import pathlib
 import shutil
 import re
-from config import API_TOKEN
+import config
 from modules.objects import *
 from modules.functions import *
 
@@ -63,6 +63,9 @@ else:
 	device.interfaces[uplink[0]][uplink[1]] = 'uplink'
 
 vlans = {}
+for vid in config.DEFAULT_VLANS:
+	print('Setting up VLAN',vid)
+	vlans[vid] = VLAN(vid,device)
 while True:
 	action = input('Type [V] to add a VLAN or [E] to save changes: ')
 	if action == 'V':
