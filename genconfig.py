@@ -49,9 +49,13 @@ while uplink == '?':
 		if available != '':
 			print(type_+available)
 	uplink = input("uplink: ")
-uplink = list(re.match(r"([a-z]+)([0-9]+)", uplink).groups())
-uplink[1] = int(uplink[1])-1
-device.interfaces[uplink[0]][uplink[1]] = 'uplink'
+uplink = list(re.match(r"([a-z]+)(.*)", uplink).groups())
+if uplink[0] == 'qsfp': # weird numbering scheme screws stuff up
+	uplink[1] = re.match(r"([0-9]+)-([0-9]+)", uplink[1]).groups()
+	device.interfaces[uplink[0]][uplink[1][0]][uplink[1][1]] = 'uplink'
+else:
+	uplink[1] = int(uplink[1])-1
+	device.interfaces[uplink[0]][uplink[1]] = 'uplink'
 
 vlans = []
 while True:
