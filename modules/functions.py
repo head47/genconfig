@@ -1,3 +1,5 @@
+import re
+
 # returns which elements of list_ pass the check in format 1-4,5,7-9
 # supports setting offset to output numbers bigger than actual indexes
 def list_to_nums(list_, check, offset=0):
@@ -26,3 +28,27 @@ def list_to_nums(list_, check, offset=0):
                 state = 1
     return nums
 
+# converts list of numbers, i.e. 1-4,5,7-9, to index list
+# supports setting offset
+def nums_expand(nums,offset=0):
+    curpos = 0
+    numslist = []
+    while True:
+        comma = nums[curpos:].find(',')
+        if comma != -1:
+            comma += curpos
+        if comma == -1:
+            substr = nums[curpos:]
+        else:
+            substr = nums[curpos:comma]
+        if '-' in substr:
+            edges = re.findall(r'\d+', substr)
+            for i in range(int(edges[0]),int(edges[1])+1):
+                numslist.append(i-offset)
+        else:
+            numslist.append(int(substr)-offset)
+        if comma == -1:
+            break
+        else:
+            curpos = comma+1
+    return numslist
