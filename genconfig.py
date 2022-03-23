@@ -2,6 +2,10 @@
 import os
 import pathlib
 import shutil
+import re
+from config import API_TOKEN
+from modules.objects import *
+from modules.functions import *
 
 print("genconfig v0.015")
 print("press ? at any time to get help")
@@ -15,6 +19,8 @@ while target == '?':
 		if t.endswith(".rsc.template"):
 			print(t[:-13])
 	target = input("target device: ")
+with open(mydir / 'templates' / (target+'.json')) as tjson:
+	device = Device(tjson.read())
 
 username = input("username: ")
 while username == '?':
@@ -34,6 +40,18 @@ output = input("output path: ")
 while output == '?':
 	print('no help available')
 	output = input("output path: ")
+
+uplink = input("uplink: ")
+while uplink == '?':
+	print('\navailable interfaces:')
+	for type_ in device.interfaces:
+		available = list_to_nums(device.interfaces[type_], lambda x: (x is None) or (x == "uplink"), 1)
+		if available != '':
+			print(type_+available)
+	uplink = input("uplink: ")
+uplink = list(re.match(r"([a-z]+)([0-9]+)", uplink).groups())
+uplink[1] = int(uplink[1])-1
+device.interfaces[uplink[0]][uplink[1]] = 'uplink'
 
 config = shutil.copy(str(mydir / 'templates' / target)+".rsc.template", output+".rsc")
 with open(config, 'a') as c:
