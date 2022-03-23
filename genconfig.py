@@ -45,9 +45,14 @@ uplink = input("uplink: ")
 while uplink == '?':
 	print('\navailable interfaces:')
 	for type_ in device.interfaces:
-		available = list_to_nums(device.interfaces[type_], lambda x: (x is None) or (x == "uplink"), 1)
-		if available != '':
-			print(type_+available)
+		if type_ == 'qsfp':
+			for i in range(0,len(device.interfaces['qsfp'])):
+				for j in range(0,len(device.interfaces['qsfp'][i])):
+					print('qsfp'+str(i+1)+'-'+str(j+1))
+		else:
+			available = list_to_nums(device.interfaces[type_], lambda x: (x is None) or (x == "uplink"), 1)
+			if available != '':
+				print(type_+available)
 	uplink = input("uplink: ")
 uplink = list(re.match(r"([a-z]+)(.*)", uplink).groups())
 if uplink[0] == 'qsfp': # weird numbering scheme screws stuff up
