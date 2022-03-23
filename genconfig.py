@@ -76,8 +76,8 @@ while True:
 	else:
 		print('ERROR: Unrecognized input.')
 
-config = shutil.copy(str(mydir / 'templates' / target)+".rsc.template", output+".rsc")
-with open(config, 'a') as c:
+cfg = shutil.copy(str(mydir / 'templates' / target)+".rsc.template", output+".rsc")
+with open(cfg, 'a') as c:
 	c.write( "\n# --- genconfig config start ---"
 			f"\n/system identity set name={identity}")
 	if username != 'admin':
@@ -87,18 +87,30 @@ with open(config, 'a') as c:
 		c.write(f"\n/user set admin password={password}")
 
 	c.write('\n/interface bridge port')
+	uplinks = []
 	for type_ in device.interfaces:
 		if type_ == 'qsfp':
 			for i in range(0,len(device.interfaces['qsfp'])):
 				for j in range(0,len(device.interfaces['qsfp'][i])):
 					if device.interfaces['qsfp'][i][j] == 'uplink':
 						c.write(f'\nadd bridge=BR-Switch frame-types=admit-only-vlan-tagged interface=qsfp{i+1}-{j+1} pvid=4094')
+						uplinks.append(f'qsfp{i+1}-{j+1}')
 					elif device.interfaces['qsfp'][i][j] != 'reserved':
 						c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface=qsfp{i+1}-{j+1} pvid=4094')
 		else:
 			for i in range(0,len(device.interfaces[type_])):
 				if device.interfaces[type_][i] == 'uplink':
 					c.write(f'\nadd bridge=BR-Switch frame-types=admit-only-vlan-tagged interface={type_}{i+1} pvid=4094')
+					uplinks.append(f'{type_}{i+1}')
 				elif device.interfaces[type_][i] != 'reserved':
 					c.write(f'\nadd bpdu-guard=yes bridge=BR-Switch interface={type_}{i+1} pvid=4094')
+
+	c.write('\n/interface bridge vlan')
+	tagged = ','.join(uplinks)
+	for vid in vlans:
+		if vid == config.MANAGEMENT_VLAN:
+			c.write(f'\nadd bridge=BR-Switch tagged={tagged},BR-Switch vlan-ids={vid}')
+		else:
+			c.write(f'\nadd bridge=BR-Switch tagged={tagged} vlan-ids={vid}')
+
 	c.write("\n# --- genconfig config end ---")

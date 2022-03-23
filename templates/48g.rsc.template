@@ -179,17 +179,6 @@ set [ find default=yes ] disabled=yes
 add addresses=::/0 name=iips-zabbix
 /system logging action
 set 3 remote=10.128.19.3 remote-port=5140
-/interface bridge vlan
-add bridge=BR-Switch comment=S5_NetDev tagged=\
-    BR-Switch,sfpp1,sfpp2,qsfp1-1,qsfp2-1,sfpp3,sfpp4 vlan-ids=1021
-add bridge=BR-Switch comment=S5_Cams tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
-    vlan-ids=1022
-add bridge=BR-Switch comment=S5_WiFi tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
-    vlan-ids=1023
-add bridge=BR-Switch comment=S5_Corp tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
-    vlan-ids=1053
-add bridge=BR-Switch comment=S5_Guests tagged=qsfp1-1,sfpp1,sfpp2,qsfp2-1 \
-    vlan-ids=1052
 /ip dhcp-client
 add disabled=no interface=v1021_BR-Switch
 /ip service

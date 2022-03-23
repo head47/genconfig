@@ -92,17 +92,6 @@ set full policy="local,telnet,ssh,ftp,reboot,read,write,policy,test,winbox,pas\
 add bridge=BR-Switch disabled=yes interface=bond_sfpp1-2 path-cost=1
 /ip neighbor discovery-settings
 set discover-interface-list=!dynamic
-/interface bridge vlan
-add bridge=BR-Switch comment=S1_NetDev tagged=\
-    BR-Switch,ether1 vlan-ids=1021
-add bridge=BR-Switch comment=S5_Cams tagged=sfpp1,ether1 \
-    vlan-ids=1022
-add bridge=BR-Switch comment=S5_WiFi tagged=sfpp1,ether1 \
-    vlan-ids=1023
-add bridge=BR-Switch comment=S5_Corp tagged=sfpp1,ether1 \
-    vlan-ids=1053
-add bridge=BR-Switch comment=S5_Guests tagged=sfpp1,ether1 \
-    vlan-ids=1052
 /ip dhcp-client
 add disabled=no interface=v1021_BR-Switch
 /ip service

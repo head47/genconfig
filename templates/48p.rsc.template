@@ -177,30 +177,6 @@ set [ find default=yes ] supplicant-identity=MikroTik
 set [ find default=yes ] html-directory=hotspot
 /ip neighbor discovery-settings
 set discover-interface-list=!dynamic
-/interface bridge vlan
-add bridge=BR-Switch comment=S1_NetDev tagged=\
-    BR-Switch,sfpp1,sfpp2,qsfp1-1,qsfp2-1 vlan-ids=1021
-add bridge=BR-Switch comment=S1_Cams tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,sfpp1,sfpp2 vlan-ids=1022
-add bridge=BR-Switch comment=S1_WiFi tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,sfpp2,sfpp1 vlan-ids=1023
-add bridge=BR-Switch comment=S1_ACS tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,sfpp2,sfpp1 vlan-ids=1024
-add bridge=BR-Switch comment=S1_Corp tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,ether47,sfpp2,sfpp1 vlan-ids=\
-    1053
-add bridge=BR-Switch comment=S1_Guests tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,ether47,sfpp1,sfpp2 vlan-ids=\
-    1052
-add bridge=BR-Switch comment=S1_fastDMZ-1 tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,sfpp1,sfpp2 vlan-ids=1097
-add bridge=BR-Switch comment=S1_fastDMZ-2 tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,sfpp1,sfpp2 vlan-ids=1098
-add bridge=BR-Switch comment=S1_fastDMZ-3 tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,sfpp1,sfpp2 vlan-ids=1099
-add bridge=BR-Switch comment=S1_Events tagged=\
-    qsfp2-1,qsfp1-1,sfpp3,sfpp4,ether47,sfpp1,sfpp2 vlan-ids=\
-    1055
 /ip dhcp-client
 add disabled=no interface=v1021_BR-Switch
 /ip service

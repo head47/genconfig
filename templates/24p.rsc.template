@@ -97,23 +97,6 @@ set full policy="local,telnet,ssh,ftp,reboot,read,write,policy,test,winbox,pas\
     sword,web,sniff,sensitive,api,romon,dude,tikapp"
 /interface bridge port
 add bridge=BR-Switch disabled=yes interface=bond_sfpp1-2
-/interface bridge vlan
-add bridge=BR-Switch comment=S1_NetDev tagged=\
-    BR-Switch,sfpp1,bond_sfpp1-2,sfpp2 vlan-ids=1021
-add bridge=BR-Switch comment=S1_Cams tagged=bond_sfpp1-2,sfpp1,sfpp2 \
-    vlan-ids=1022
-add bridge=BR-Switch comment=S1_WiFi tagged=bond_sfpp1-2,sfpp1,sfpp2 \
-    vlan-ids=1023
-add bridge=BR-Switch comment=S1_Corp tagged=bond_sfpp1-2,sfpp1,sfpp2 \
-    vlan-ids=1053
-add bridge=BR-Switch comment=S1_Guests tagged=bond_sfpp1-2,sfpp1,sfpp2 \
-    vlan-ids=1052
-add bridge=BR-Switch comment=S1_fastDMZ-1 tagged=bond_sfpp1-2,sfpp1,sfpp2 \
-    vlan-ids=1097
-add bridge=BR-Switch comment=S1_fastDMZ-2 tagged=bond_sfpp1-2,sfpp1,sfpp2 \
-    vlan-ids=1098
-add bridge=BR-Switch comment=S1_fastDMZ-3 tagged=bond_sfpp1-2,sfpp1,sfpp2 \
-    vlan-ids=1099
 /ip dhcp-client
 add disabled=no interface=v1021_BR-Switch
 /ip service
