@@ -21,7 +21,7 @@ class VLAN:
         self.vid = vid
         self.interfaces = []
         print("""which ports have this VLAN as primary?
-format: <type> <list> (example: ether 1-7,14,17-20), one per line
+format: <type> <list> (example: ether 1~7,14,17~20), one per line
 enter "." to end""")
         while True:
             line = input('> ')

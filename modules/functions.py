@@ -12,7 +12,7 @@ def list_to_nums(list_, check, offset=0):
                 state = 1
         elif state == 1: # just after number
             if check(list_[i]):
-                nums += '-'
+                nums += '~'
                 state = 2
             else:
                 state = 3
@@ -41,7 +41,7 @@ def nums_expand(nums,offset=0):
             substr = nums[curpos:]
         else:
             substr = nums[curpos:comma]
-        if '-' in substr:
+        if '~' in substr:
             edges = re.findall(r'\d+', substr)
             for i in range(int(edges[0]),int(edges[1])+1):
                 numslist.append(i-offset)
