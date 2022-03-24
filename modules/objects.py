@@ -37,7 +37,45 @@ enter "." to end""")
             else:
                 line = line.split()
                 type_ = line[0]
-                nums = nums_expand(line[1])
-                for i in nums:
-                    device.interfaces[type_][i-1] = 'vlan'+vid
-                    self.interfaces.append(type_+str(i))
+                if type_ == 'qsfp':
+                    print('ERROR: Including QSFP interfaces in VLANs is not implemented yet. Discarding previous line.')
+                    continue
+                try:
+                    nums = nums_expand(line[1])
+                except:
+                    print('ERROR: Unable to parse input. Discarding previous line.')
+                    continue
+                if nums[0] <= 0:
+                    print('ERROR: The specified range of interfaces is invalid. Discarding previous line.')
+                    continue
+                try:
+                    for i in nums:
+                        device.interfaces[type_][i-1]
+                except KeyError:
+                    print(f'ERROR: {type_} is not a valid interface type. Discarding previous line.')
+                except IndexError:
+                    print(f'ERROR: The specified range of interfaces is invalid. Discarding previous line.')
+                else:
+                    overrideflag = False
+                    contflag = False
+                    for i in nums:
+                        if device.interfaces[type_][i-1] is not None:
+                            if device.interfaces[type_][i-1] == 'reserved':
+                                print(f'ERROR: {type_}{i} is a reserved port. Discarding previous line.')
+                                contflag = True
+                                break
+                            if (not overrideflag) and (device.interfaces[type_][i-1] != 'vlan'+vid):
+                                response = input(f'WARNING: {type_}{i} is registered as {device.interfaces[type_][i-1]}. Override with this VLAN? [y/N/a] ')
+                                if response.lower() == 'y':
+                                    continue
+                                elif response.lower() == 'a':
+                                    overrideflag = True
+                                else:
+                                    print('Discarding previous line.')
+                                    contflag = True
+                                    break
+                    if contflag:
+                        continue
+                    for i in nums:
+                        device.interfaces[type_][i-1] = 'vlan'+vid
+                        self.interfaces.append(type_+str(i))

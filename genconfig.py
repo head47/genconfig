@@ -37,7 +37,10 @@ for vid in config.DEFAULT_VLANS:
 	if name is None:
 		response = input("WARNING: Couldn't fetch VLAN info from NetBox. Still add it? [y/N] ")
 		if response.lower() == 'y':
-			name = input('VLAN name: ')
+			name = input('VLAN name []: ')
+			while not re.match(r'^[a-zA-Z0-9-_]*$',name):
+				print('ERROR: Invalid characters in VLAN name.')
+				name = input('VLAN name []: ')
 			vlans[vid] = VLAN(vid,device,name)
 	else:
 		vlans[vid] = VLAN(vid,device,name)
@@ -49,7 +52,10 @@ while True:
 		if name is None:
 			response = input("WARNING: Couldn't fetch VLAN info from NetBox. Still add it? [y/N] ")
 			if response.lower() == 'y':
-				name = input('VLAN name: ')
+				name = input('VLAN name []: ')
+				while not re.match(r'^[a-zA-Z0-9-_]*$',name):
+					print('ERROR: Invalid characters in VLAN name.')
+					name = input('VLAN name []: ')
 				vlans[vid] = VLAN(vid,device,name)
 		else:
 			vlans[vid] = VLAN(vid,device,name)
