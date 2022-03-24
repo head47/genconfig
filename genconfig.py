@@ -8,7 +8,7 @@ from modules.objects import *
 from modules.functions import *
 import modules.queries as queries
 
-print("genconfig v0.015")
+print("genconfig v1.0")
 print("press ? at any time to get help")
 mypath = pathlib.PurePath(os.path.realpath(__file__))
 mydir = mypath.parent
