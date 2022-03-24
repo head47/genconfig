@@ -64,15 +64,14 @@ def output():
             inp = input("output path [output.rsc]: ")
         if inp == '':
             return 'output.rsc'
+        if not inp.endswith('.rsc'):
+            inp += '.rsc'
         try:
             open(inp,'w')
         except:
             print('ERROR: Output path is not writable.')
         else:
-            if not inp.endswith('.rsc'):
-                return inp+'.rsc'
-            else:
-                return inp
+            return inp
 
 def uplink(device):
     while True:
