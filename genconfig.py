@@ -6,60 +6,28 @@ import re
 import config
 from modules.objects import *
 from modules.functions import *
+import modules.queries as queries
 
 print("genconfig v0.015")
 print("press ? at any time to get help")
 mypath = pathlib.PurePath(os.path.realpath(__file__))
 mydir = mypath.parent
 
-target = input("target device: ")
-while target == '?':
-	print("\navailable device templates:")
-	for t in os.listdir(mydir / 'templates'):
-		if t.endswith(".rsc.template"):
-			print(t[:-13])
-	target = input("target device: ")
+target = queries.target(mydir)
 with open(mydir / 'templates' / (target+'.json')) as tjson:
 	device = Device(tjson.read())
 
-username = input("username: ")
-while username == '?':
-	print('no help available')
-	username = input("username: ")
-password = input("password: ")
-while password == '?':
-	print('no help available')
-	password = input("password: ")
+username = queries.username()
+password = queries.password()
+identity = queries.identity()
+output = queries.output()
 
-identity = input("identity: ")
-while identity == '?':
-	print('no help available')
-	identity = input("identity: ")
-
-output = input("output path: ")
-while output == '?':
-	print('no help available')
-	output = input("output path: ")
-
-uplink = input("uplink: ")
-while uplink == '?':
-	print('\navailable interfaces:')
-	for type_ in device.interfaces:
-		if type_ == 'qsfp':
-			for i in range(0,len(device.interfaces['qsfp'])):
-				for j in range(0,len(device.interfaces['qsfp'][i])):
-					print('qsfp'+str(i+1)+'-'+str(j+1))
-		else:
-			available = list_to_nums(device.interfaces[type_], lambda x: (x is None) or (x == "uplink"), 1)
-			if available != '':
-				print(type_+available)
-	uplink = input("uplink: ")
-uplink = list(re.match(r"([a-z]+)(.*)", uplink).groups())
-if uplink[0] == 'qsfp': # weird numbering scheme screws stuff up
-	uplink[1] = re.match(r"([0-9]+)-([0-9]+)", uplink[1]).groups()
-	device.interfaces[uplink[0]][int(uplink[1][0])-1][int(uplink[1][1])-1] = 'uplink'
+uplink = queries.uplink(device)
+if uplink == '':
+	pass
+elif uplink[0] == 'qsfp': # weird numbering scheme screws stuff up
+	device.interfaces[uplink[0]][uplink[1][0]][uplink[1][1]] = 'uplink'
 else:
-	uplink[1] = int(uplink[1])-1
 	device.interfaces[uplink[0]][uplink[1]] = 'uplink'
 
 vlans = {}
@@ -90,7 +58,7 @@ while True:
 	else:
 		print('ERROR: Unrecognized input.')
 
-cfg = shutil.copy(str(mydir / 'templates' / target)+".rsc.template", output+".rsc")
+cfg = shutil.copy(str(mydir / 'templates' / target)+".rsc.template", output)
 with open(cfg, 'a') as c:
 	c.write( "\n# --- genconfig config start ---"
 			f"\n/system identity set name={identity}")
