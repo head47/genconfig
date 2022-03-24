@@ -65,12 +65,26 @@ else:
 vlans = {}
 for vid in config.DEFAULT_VLANS:
 	print('Setting up VLAN',vid)
-	vlans[vid] = VLAN(vid,device)
+	name = get_VLAN_name(vid)
+	if name is None:
+		response = input("WARNING: Couldn't fetch VLAN info from NetBox. Still add it? [y/N] ")
+		if response.lower() == 'y':
+			name = input('VLAN name: ')
+			vlans[vid] = VLAN(vid,device,name)
+	else:
+		vlans[vid] = VLAN(vid,device,name)
 while True:
 	action = input('Type [V] to add a VLAN or [E] to save changes: ')
 	if action == 'V':
 		vid = input('vid: ')
-		vlans[vid] = VLAN(vid,device)
+		name = get_VLAN_name(vid)
+		if name is None:
+			response = input("WARNING: Couldn't fetch VLAN info from NetBox. Still add it? [y/N] ")
+			if response.lower() == 'y':
+				name = input('VLAN name: ')
+				vlans[vid] = VLAN(vid,device,name)
+		else:
+			vlans[vid] = VLAN(vid,device,name)
 	elif action == 'E':
 		break
 	else:
@@ -115,8 +129,8 @@ with open(cfg, 'a') as c:
 	tagged = ','.join(uplinks)
 	for vid in vlans:
 		if vid == config.MANAGEMENT_VLAN:
-			c.write(f'\nadd bridge=BR-Switch tagged={tagged},BR-Switch vlan-ids={vid}')
+			c.write(f'\nadd bridge=BR-Switch tagged={tagged},BR-Switch vlan-ids={vid} comment={vlans[vid].name}')
 		else:
-			c.write(f'\nadd bridge=BR-Switch tagged={tagged} vlan-ids={vid}')
+			c.write(f'\nadd bridge=BR-Switch tagged={tagged} vlan-ids={vid} comment={vlans[vid].name}')
 
 	c.write("\n# --- genconfig config end ---")

@@ -17,9 +17,10 @@ class Device:
             self.interfaces["qsfp"] = []
 
 class VLAN:
-    def __init__(self, vid, device):
+    def __init__(self, vid, device, name):
         self.vid = vid
         self.interfaces = []
+        self.name = name
         print("""which ports have this VLAN as primary?
 format: <type> <list> (example: ether 1~7,14,17~20), one per line
 enter "." to end""")
