@@ -1,5 +1,8 @@
 import re
+import requests
+import config
 
+api = f'http://{config.NETBOX_ADDRESS}:{config.NETBOX_PORT}/api/'
 # returns which elements of list_ pass the check in format 1-4,5,7-9
 # supports setting offset to output numbers bigger than actual indexes
 def list_to_nums(list_, check, offset=0):
@@ -52,3 +55,28 @@ def nums_expand(nums,offset=0):
         else:
             curpos = comma+1
     return numslist
+
+def get_VLAN_name(vid):
+    search_response = requests.get(f'{api}ipam/vlans/?vid={vid}', headers={
+        'Authorization': f'Token {config.API_TOKEN}'
+    }).json()
+    if search_response['count'] == 0:
+        return None
+    elif search_response['count'] == 1:
+        return search_response['results'][0]['name']
+    else:
+        vlans = search_response['results']
+        print('\navailable VLANs with this VID:')
+        for i in range(0, search_response['count']):
+            if vlans[i]['site'] is None:
+                if vlans[i]['group'] is None:
+                    print(f"{i+1}. {vlans[i]['name']} (no site or group assignment)")
+                else:
+                    print(f"{i+1}. {vlans[i]['name']} (group {vlans[i]['group']['name']})")
+            else:
+                if vlans[i]['group'] is None:
+                    print(f"{i+1}. {vlans[i]['name']} (site {vlans[i]['site']['name']})")
+                else:
+                    print(f"{i+1}. {vlans[i]['name']} (site {vlans[i]['site']['name']}, group {vlans[i]['group']['name']})")
+        selection = input(f"entry number ({1}-{search_response['count']}): ")
+        return vlans[int(selection)-1]['name']
