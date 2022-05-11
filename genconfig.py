@@ -4,6 +4,7 @@ import pathlib
 import shutil
 import re
 import config
+import readline
 from modules.objects import *
 from modules.functions import *
 import modules.queries as queries
