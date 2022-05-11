@@ -57,9 +57,12 @@ def nums_expand(nums,offset=0):
     return numslist
 
 def get_VLAN_name(vid):
-    search_response = requests.get(f'{api}ipam/vlans/?vid={vid}', headers={
-        'Authorization': f'Token {config.API_TOKEN}'
-    }).json()
+    try:
+        search_response = requests.get(f'{api}ipam/vlans/?vid={vid}', headers={
+            'Authorization': f'Token {config.API_TOKEN}'
+        }).json()
+    except requests.exceptions.ConnectionError:
+        return None
     if search_response['count'] == 0:
         return None
     elif search_response['count'] == 1:
