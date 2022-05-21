@@ -25,7 +25,7 @@ class VLAN:
 format: <type> <list> (example: ether 1~7,14,17~20), one per line
 enter "." to end""")
         while True:
-            line = input('> ')
+            line = flushed_input('> ')
             if line == '?':
                 print('\navailable interfaces:')
                 for type_ in device.interfaces:
@@ -65,7 +65,7 @@ enter "." to end""")
                                 contflag = True
                                 break
                             if (not overrideflag) and (device.interfaces[type_][i-1] != 'vlan'+vid):
-                                response = input(f'WARNING: {type_}{i} is registered as {device.interfaces[type_][i-1]}. Override with this VLAN? [y/N/a] ')
+                                response = flushed_input(f'WARNING: {type_}{i} is registered as {device.interfaces[type_][i-1]}. Override with this VLAN? [y/N/a] ')
                                 if response.lower() == 'y':
                                     continue
                                 elif response.lower() == 'a':

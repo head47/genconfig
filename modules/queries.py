@@ -4,13 +4,13 @@ from modules.functions import *
 
 def target(mydir):
     while True:
-        inp = input("target device: ")
+        inp = flushed_input("target device: ")
         while inp == '?':
             print("\navailable device templates:")
             for t in os.listdir(mydir / 'templates'):
                 if t.endswith(".rsc.template"):
                     print(t[:-13])
-            inp = input("target device: ")
+            inp = flushed_input("target device: ")
         if os.path.isfile(mydir / 'templates' / (inp+'.rsc.template')):
             if os.path.isfile(mydir / 'templates' / (inp+'.json')):
                 return inp
@@ -21,10 +21,10 @@ def target(mydir):
 
 def username():
     while True:
-        inp = input("username [admin]: ")
+        inp = flushed_input("username [admin]: ")
         while inp == '?':
             print('no help available')
-            inp = input("username [admin]: ")
+            inp = flushed_input("username [admin]: ")
         if inp == '':
             return 'admin'
         if not re.match(r'^[a-zA-Z0-9][a-zA-Z0-9*_.@]*$',inp):
@@ -34,10 +34,10 @@ def username():
 
 def password():
     while True:
-        inp = input("password []: ")
+        inp = flushed_input("password []: ")
         while inp == '?':
             print('no help available')
-            inp = input("password []: ")
+            inp = flushed_input("password []: ")
         if not re.match(r'^[a-zA-Z0-9*_]*$',inp):
             print('ERROR: Invalid characters in password.')
         else:
@@ -45,10 +45,10 @@ def password():
 
 def identity():
     while True:
-        inp = input("identity [MikroTik]: ")
+        inp = flushed_input("identity [MikroTik]: ")
         while inp == '?':
             print('no help available')
-            inp = input("identity [MikroTik]: ")
+            inp = flushed_input("identity [MikroTik]: ")
         if inp == '':
             return 'MikroTik'
         if not re.match(r'^[a-zA-Z0-9_-]*$',inp):
@@ -58,10 +58,10 @@ def identity():
 
 def output():
     while True:
-        inp = input("output path [output.rsc]: ")
+        inp = flushed_input("output path [output.rsc]: ")
         while inp == '?':
             print('no help available')
-            inp = input("output path [output.rsc]: ")
+            inp = flushed_input("output path [output.rsc]: ")
         if inp == '':
             return 'output.rsc'
         if not inp.endswith('.rsc'):
@@ -75,7 +75,7 @@ def output():
 
 def uplink(device):
     while True:
-        uplink = input("uplink []: ")
+        uplink = flushed_input("uplink []: ")
         while uplink == '?':
             print('\navailable interfaces:')
             for type_ in device.interfaces:
@@ -87,7 +87,7 @@ def uplink(device):
                     available = list_to_nums(device.interfaces[type_], lambda x: (x is None) or (x == "uplink"), 1)
                     if available != '':
                         print(type_+available)
-            uplink = input("uplink: ")
+            uplink = flushed_input("uplink: ")
         if uplink == '':
             return ''
         try:

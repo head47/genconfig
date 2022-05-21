@@ -1,6 +1,7 @@
 import re
 import requests
 import config
+import sys
 
 api = f'http://{config.NETBOX_ADDRESS}:{config.NETBOX_PORT}/api/'
 # returns which elements of list_ pass the check in format 1-4,5,7-9
@@ -81,5 +82,15 @@ def get_VLAN_name(vid):
                     print(f"{i+1}. {vlans[i]['name']} (site {vlans[i]['site']['name']})")
                 else:
                     print(f"{i+1}. {vlans[i]['name']} (site {vlans[i]['site']['name']}, group {vlans[i]['group']['name']})")
-        selection = input(f"entry number ({1}-{search_response['count']}): ")
+        selection = flushed_input(f"entry number ({1}-{search_response['count']}): ")
         return vlans[int(selection)-1]['name']
+
+def flushed_input(query=''):
+    if not sys.stdout.isatty():
+        print(query)
+    else:
+        print(query, end='')
+    inp = input()
+    if (inp == '') and (sys.stdout.isatty()):
+        print()
+    return inp
