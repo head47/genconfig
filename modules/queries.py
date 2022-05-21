@@ -103,7 +103,7 @@ def uplink(device):
                 continue
             try:
                 if device.interfaces['qsfp'][uplink[1][0]][uplink[1][1]] == 'reserved':
-                    response = input(f'ERROR: qsfp{uplink[1][0]+1}-{uplink[1][1]+1} is a reserved interface.')
+                    print(f'ERROR: qsfp{uplink[1][0]+1}-{uplink[1][1]+1} is a reserved interface.')
                     continue
             except (KeyError,IndexError):
                 print(f'ERROR: Interface qsfp{uplink[1][0]+1}-{uplink[1][1]+1} does not exist.')
@@ -116,7 +116,7 @@ def uplink(device):
                 continue
             try:
                 if device.interfaces[uplink[0]][uplink[1]] == 'reserved':
-                    response = input(f'ERROR: {uplink[0]}{uplink[1]+1} is a reserved interface.')
+                    print(f'ERROR: {uplink[0]}{uplink[1]+1} is a reserved interface.')
                     continue
             except (KeyError,IndexError):
                 print(f'ERROR: Interface {uplink[0]}{uplink[1]+1} does not exist.')
